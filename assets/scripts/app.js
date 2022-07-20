@@ -3,12 +3,20 @@ const STRONG_ATTACK_VALUE = 17;
 const MONSTER_ATTACK_VALUE = 14;
 const HEAL_VALUE = 20;
 
-let chosenMaxLife = 100;
+const enteredValuer = prompt("Maximum life for you and the monster", "100");
+
+let chosenMaxLife = parseInt(enteredValuer);
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 let hasBonusLife = true;
 
 adjustHealthBars(chosenMaxLife);
+
+function reset() {
+  let currentMonsterHealth = chosenMaxLife;
+  let currentPlayerHealth = chosenMaxLife;
+  resetGame(chosenMaxLife);
+}
 
 function endRound() {
   const initialPlayerHealth = currentPlayerHealth;
@@ -20,7 +28,6 @@ function endRound() {
     removeBonusLife();
     currentPlayerHealth = initialPlayerHealth;
     alert("you would be dead but the bonus life saved you!");
-    
   }
 
   if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
@@ -29,6 +36,9 @@ function endRound() {
     alert("you lost!");
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
     alert("you have a draw");
+  }
+  if (currentMonsterHealth <= 0 || currentPlayerHealth <= 0) {
+    reset();
   }
 }
 
