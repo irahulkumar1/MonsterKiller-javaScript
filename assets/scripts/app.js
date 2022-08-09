@@ -33,23 +33,49 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
     finalMonsterHealth: monsterHealth,
     finalPlayerHealth: playerHealth,
   };
-  if (ev === LOG_EVENT_PLAYER_ATTACK) {
-    logEntry.target = "MONSTER";
-  } else if (ev == LOG_EVENT_PLAYER_STRONG_ATTACK) {
-    logEntry = {
-      event: ev,
-      value: val,
-      target: "MONSTER",
-      finalMonsterHealth: monsterHealth,
-      finalPlayerHealth: playerHealth,
-    };
-  } else if (ev == LOG_EVENT_MONSTER_ATTACK) {
-    logEntry.target = "PLAYER";
-  } else if (ev == LOG_EVENT_PLAYER_HEAL) {
-    logEntry.target = "PLAYER";
-  } else if (ev == LOG_EVENT_PLAYER_GAME_OVER) {
-    logEntry;
+  switch (ev) {
+    case LOG_EVENT_PLAYER_ATTACK:
+      logEntry.target = "MONSTER";
+      break;
+    case LOG_EVENT_PLAYER_STRONG_ATTACK:
+      logEntry = {
+        event: ev,
+        value: val,
+        target: "MONSTER",
+        finalMonsterHealth: monsterHealth,
+        finalPlayerHealth: playerHealth,
+      };
+      break;
+    case LOG_EVENT_MONSTER_ATTACK:
+      logEntry.target = "PLAYER";
+      break;
+    case LOG_EVENT_PLAYER_HEAL:
+      logEntry.target = "PLAYER";
+      break;
+    case LOG_EVENT_PLAYER_GAME_OVER:
+      logEntry;
+      break;
+    default:
+      logEntry = {};
   }
+  //replaced with switch case
+  // if (ev === LOG_EVENT_PLAYER_ATTACK) {
+  //   logEntry.target = "MONSTER";
+  // } else if (ev == LOG_EVENT_PLAYER_STRONG_ATTACK) {
+  //   logEntry = {
+  //     event: ev,
+  //     value: val,
+  //     target: "MONSTER",
+  //     finalMonsterHealth: monsterHealth,
+  //     finalPlayerHealth: playerHealth,
+  //   };
+  // } else if (ev == LOG_EVENT_MONSTER_ATTACK) {
+  //   logEntry.target = "PLAYER";
+  // } else if (ev == LOG_EVENT_PLAYER_HEAL) {
+  //   logEntry.target = "PLAYER";
+  // } else if (ev == LOG_EVENT_PLAYER_GAME_OVER) {
+  //   logEntry;
+  // }
   battleLog.push(logEntry);
 }
 
@@ -108,7 +134,7 @@ function endRound() {
 }
 
 function attackMonster(mode) {
-  let maxDamage = mode === MODE_ATTACK ? ATTACK_VALUE : STRONG_ATTACK_VALUE;
+  const maxDamage = mode === MODE_ATTACK ? ATTACK_VALUE : STRONG_ATTACK_VALUE;
   let logEvent =
     mode === MODE_ATTACK ? LOG_EVENT_PLAYER_ATTACK : STRONG_ATTACK_VALUE;
   // if (mode === MODE_ATTACK) {
