@@ -192,7 +192,7 @@ function printLogHandler() {
         break outerWhile;
        // continue outerWhile; // dangerous! => Infinite Loop
       }
-      console.log("Inner", k);
+      console.log("Inner", k); 
     }
     j++;
   } while (j < 3);
